@@ -1,4 +1,3 @@
---wow
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Aomsing1thub/Kavo/main/README.md"))()
 local Window = Library.CreateLib("TITLE", "Synapse")
 local Tab = Window:NewTab("Main")
