@@ -59,7 +59,7 @@ Section:NewButton("Go to Camp Fire", "Check", function() -- Buttton
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 0, 10)
 end)
 
-Section:NewButton("Open all crate", "Check", function() -- Buttton
+Section:NewButton("Open all crate", "Check", function() 
     for key, v in pairs(workspace:WaitForChild("Items"):GetDescendants()) do
         if v:IsA("ProximityPrompt") then
             fireproximityprompt(v)
