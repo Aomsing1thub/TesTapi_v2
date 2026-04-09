@@ -112,7 +112,7 @@ end
 end
 end)
 
-Section:NewKeybind("Go to Camp Fire", "KeybindInfo", Enum.KeyCode.E, function() -- Key OPEN/CLOSE
+Section:NewKeybind("Go to Camp Fire", "KeybindInfo", Enum.KeyCode.Q, function() -- Key OPEN/CLOSE
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 2, 10)
 end)
 
