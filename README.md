@@ -50,6 +50,30 @@ Section:NewButton("Bring Bandage", "Check", function() -- Buttton
     end
 end)
 
+Section:NewButton("Bring All Blueprint", "Check", function() -- Buttton
+    for key, v in pairs(workspace:WaitForChild("Items"):GetChildren()) do
+        if string.find(v.Name,"Blueprint") then
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("RequestStartDraggingItem"):FireServer(v)
+            if v:FindFirstChild("Main") then
+                v.Main.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-5)
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("StopDraggingItem"):FireServer(v)
+        end
+    end
+end)
+
+Section:NewButton("Bring All Sack", "Check", function() -- Buttton
+    for key, v in pairs(workspace:WaitForChild("Items"):GetChildren()) do
+        if string.find(v.Name,"Sack") then
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("RequestStartDraggingItem"):FireServer(v)
+            if v:FindFirstChild("Sack") then
+                v.Sack.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-5)
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("StopDraggingItem"):FireServer(v)
+        end
+    end
+end)
+
 Section:NewButton("Bring Strong Flashlight", "Check", function() -- Buttton
     for key, v in pairs(workspace:WaitForChild("Items"):GetChildren()) do
         if v.Name == "Strong Flashlight" then
@@ -124,7 +148,7 @@ Section:NewKeybind("Go to Camp Fire", "KeybindInfo", Enum.KeyCode.Z, function() 
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 5, 10)
 end)
 
-Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.RightControl, function() -- Key OPEN/CLOSE
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.X, function() -- Key OPEN/CLOSE
 	Library:ToggleUI()
 end)
 
