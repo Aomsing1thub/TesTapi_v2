@@ -200,7 +200,6 @@ pcall(function()
         if v.Name == "Small Tree" and a2 then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Trunk.CFrame * CFrame.new(0,10,0)
             wait(.1)
-            repeat wait()
             local args = {
                 v,
                 Mytool,
@@ -208,7 +207,6 @@ pcall(function()
                 CFrame.new(-52.84754943847656, 3.8810336589813232, 36.91767501831055, -0.4882603883743286, 8.754180491621355e-09, 0.8726980090141296, -3.554958993845503e-08, 1, -2.99205886733489e-08, -0.8726980090141296, -4.5633093748165265e-08, -0.4882603883743286)
             }
             game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("ToolDamageObject"):InvokeServer(unpack(args))
-            until not v:IsDescendantOf(game) or not a2
         end
     end
 end)
