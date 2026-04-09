@@ -125,6 +125,12 @@ Section:NewToggle("Hide Frog", "ToggleInfo", function(state)
     end
 end)
 
+Section:NewToggle("Auto Cut tree", "ToggleInfo", function(state)
+    a2 = state
+    if not a2 then
+    end
+end)
+
 spawn(function()
 while wait() do
 if a1 then
@@ -137,6 +143,36 @@ pcall(function()
     for key, v in pairs(workspace.Map.Boundaries:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
             Touch(v)
+        end
+    end
+end)
+end
+end
+end)
+
+spawn(function()
+while wait() do
+if a2 then
+pcall(function()
+    for i,v in pairs (game:GetService("Players").LocalPlayer.Inventory:GetChildren()) do
+        if string.find(v.Name,"Axe") then
+            Mytool = v
+        end
+    end
+
+    for key, v in pairs(workspace.Map.Foliage:GetChildren()) do
+        if v.Name == "Small Tree" and a2 then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Trunk.CFrame * CFrame.new(0,10,0)
+            wait(.1)
+            repeat wait()
+            local args = {
+                v,
+                Mytool,
+                "27_2777604486",
+                CFrame.new(-52.84754943847656, 3.8810336589813232, 36.91767501831055, -0.4882603883743286, 8.754180491621355e-09, 0.8726980090141296, -3.554958993845503e-08, 1, -2.99205886733489e-08, -0.8726980090141296, -4.5633093748165265e-08, -0.4882603883743286)
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("ToolDamageObject"):InvokeServer(unpack(args))
+            until v:IsDescendantOf(game) or not a2
         end
     end
 end)
