@@ -847,7 +847,10 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
         if copiedButtonOne then
             local firstTextLabel = copiedButtonOne:FindFirstChild("TextLabel")
             if firstTextLabel and firstTextLabel:IsA("TextLabel") then
-                firstTextLabel.Text = primaryCharacter
+                local sourceButtonOne = powersFrame:FindFirstChild("TrolarBotao") or powersFrame:FindFirstChild("TrolarBotรฃo") or powersFrame:FindFirstChild("TrolarBotão")
+                if sourceButtonOne and sourceButtonOne:FindFirstChild("TextLabel") then
+                    firstTextLabel.Text = sourceButtonOne.TextLabel.Text
+                end
             end
         end
 
@@ -855,7 +858,10 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
         if copiedButtonTwo then
             local secondTextLabel = copiedButtonTwo:FindFirstChild("TextLabel")
             if secondTextLabel and secondTextLabel:IsA("TextLabel") then
-                secondTextLabel.Text = primaryCharacter .. " 2"
+                local sourceButtonTwo = powersFrame:FindFirstChild("TrolarBotao2")
+                if sourceButtonTwo and sourceButtonTwo:FindFirstChild("TextLabel") then
+                    secondTextLabel.Text = sourceButtonTwo.TextLabel.Text
+                end
             end
         end
 
