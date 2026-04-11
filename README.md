@@ -834,7 +834,8 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
     local primaryCharacter = selectedOptions[1]
     local secondaryCharacter = selectedOptions[2]
 
-    if primaryCharacter then
+    if secondaryCharacter then
+    elseif primaryCharacter then
         fireTransformButton(primaryCharacter)
     end
 
@@ -849,6 +850,7 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
         end
     end
 
+    return
     if #selectedOptions == 1 then
         if game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("2_1") then
             game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("2_1"):Destroy()
