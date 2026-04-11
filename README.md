@@ -639,8 +639,16 @@ pcall(function()
     if workspace.CurrentArena["Power Arena"].Arena.Piao:FindFirstChild("Cone") then
         workspace.CurrentArena["Power Arena"].Arena.Piao.Cone:Destroy()
     end
-
-    if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y <= 28 or game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BallSocketConstraint") then
+    if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BallSocketConstraint") then
+        if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
+            local Noclip = Instance.new("BodyVelocity")
+            Noclip.Name = "GGEZ"
+            Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+            Noclip.MaxForce = Vector3.new(100000,100000,100000)
+            Noclip.Velocity = Vector3.new(0,0,0)
+        end
+    end
+    if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y <= 28 then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Save
         if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
             local Noclip = Instance.new("BodyVelocity")
