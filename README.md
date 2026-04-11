@@ -794,6 +794,7 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
         else
             firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[2]].Transform.MouseButton1Click)
         end
+        print(selectedOptions[2])
         firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[2]].Transform.MouseButton1Click)
     end
 end)
