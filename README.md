@@ -792,7 +792,8 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
                 cloned.TextLabel.Name = selectedOptions[2].."2"
             end
         end
-        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[1]].Transform.MouseButton1Click)
+        wait()
+        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[2]].Transform.MouseButton1Click)
     end
 end)
 
