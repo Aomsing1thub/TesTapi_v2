@@ -834,23 +834,34 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
     local primaryCharacter = selectedOptions[1]
     local secondaryCharacter = selectedOptions[2]
 
-    if secondaryCharacter then
-    elseif primaryCharacter then
+    if not secondaryCharacter and primaryCharacter then
         fireTransformButton(primaryCharacter)
     end
 
-    if secondaryCharacter and fireTransformButton(secondaryCharacter) then
+    if primaryCharacter and secondaryCharacter and fireTransformButton(primaryCharacter) then
         task.wait()
         clonePowerButton({ "TrolarBotão", "TrolarBotao", "TrolarBotรฃo" }, "2_1", secondaryCharacter)
-        clonePowerButton("TrolarBotao2", "2_2", secondaryCharacter .. " 2")
+        clonePowerButton("TrolarBotao2", "2_2", primaryCharacter .. " 2")
 
-        if primaryCharacter then
-            task.wait()
-            fireTransformButton(primaryCharacter)
+        local copiedButtonOne = powersFrame:FindFirstChild("2_1")
+        if copiedButtonOne then
+            local firstTextLabel = copiedButtonOne:FindFirstChild("TextLabel")
+            if firstTextLabel and firstTextLabel:IsA("TextLabel") then
+                firstTextLabel.Text = primaryCharacter
+            end
         end
-    end
 
-    return
+        local copiedButtonTwo = powersFrame:FindFirstChild("2_2")
+        if copiedButtonTwo then
+            local secondTextLabel = copiedButtonTwo:FindFirstChild("TextLabel")
+            if secondTextLabel and secondTextLabel:IsA("TextLabel") then
+                secondTextLabel.Text = primaryCharacter .. " 2"
+            end
+        end
+
+        task.wait()
+        fireTransformButton(secondaryCharacter)
+    end
 end)
 
 task.spawn(function()
