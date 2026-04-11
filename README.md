@@ -592,17 +592,16 @@ for key, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.
 end
 
 Section:NewDropdown("Characters", dataname, function(currentOption)
-    Charact = currentOption
+    game:GetService("ReplicatedStorage"):WaitForChild("MorphRequest"):FireServer(currentOption)
 end)
 
-Section:NewDropdown("Change Skill", dataname, function(currentOption)
-    Charact = currentOption
+Section:NewDropdown("Change Skill", Mydata, function(currentOption)
     firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[currentOption].Transform.MouseButton1Click)
 end)
 
-Section:NewButton("Button", function()
-    game:GetService("ReplicatedStorage"):WaitForChild("MorphRequest"):FireServer(Charact)
-end)
+-- Section:NewButton("Button", function()
+    
+-- end)
 
 Section:NewToggle("Toggle", false, function(state)
     a1 = state
