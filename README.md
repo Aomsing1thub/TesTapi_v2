@@ -646,11 +646,11 @@ function Section:NewMultiDropdown(name, options, callback)
         return result
     end
 
-    local function rebuildSelectedOptions()
-        table.clear(selectedOptions)
-        for _, optionName in ipairs(options) do
-            if selectedLookup[optionName] then
-                table.insert(selectedOptions, optionName)
+    local function removeSelectedOption(optionName)
+        for index, selectedName in ipairs(selectedOptions) do
+            if selectedName == optionName then
+                table.remove(selectedOptions, index)
+                break
             end
         end
     end
@@ -700,8 +700,14 @@ function Section:NewMultiDropdown(name, options, callback)
             optionCorner.Parent = optionButton
 
             optionButton.MouseButton1Click:Connect(function()
-                selectedLookup[optionName] = not selectedLookup[optionName] or nil
-                rebuildSelectedOptions()
+                if selectedLookup[optionName] then
+                    selectedLookup[optionName] = nil
+                    removeSelectedOption(optionName)
+                else
+                    selectedLookup[optionName] = true
+                    table.insert(selectedOptions, optionName)
+                end
+
                 updateDropdownText()
                 rebuildDropdownOptions()
                 if callback then
@@ -713,7 +719,6 @@ function Section:NewMultiDropdown(name, options, callback)
         refreshDropdownCard()
     end
 
-    rebuildSelectedOptions()
     rebuildDropdownOptions()
     updateDropdownText()
 
