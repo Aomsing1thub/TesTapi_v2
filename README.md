@@ -613,21 +613,35 @@ Section:NewToggle("Toggle", false, function(state)
 end)
 
 task.spawn(function()
+while wait() do
+if a1 then
+pcall(function()
+    if game.Players.LocalPlayer.Character.Humanoid.FloorMaterial ~= "Air" then
+        Save = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        wait(.5)
+        if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
+            game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ"):Destroy()
+        end 
+    end
+end)
+end
+end
+end)
+
+task.spawn(function()
 while task.wait() do
 if a1 then
 pcall(function()
-	for key, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.TrocarPersonagem.ScrollingFrame:GetChildren()) do
-		if v:IsA("ImageButton") then
-			if v.Visible then
-				game:GetService("ReplicatedStorage"):WaitForChild("SkillEvent"):FireServer(v.Name)
-				wait()
-				game:GetService("ReplicatedStorage"):WaitForChild("SkillEvent"):FireServer(v.Name.."2")
-			end
-		end
-	end
-    fireproximityprompt(workspace.Daily.AwardPrize.AwardPrompt)
-	game:GetService("ReplicatedStorage"):WaitForChild("ClaimChestFunc"):InvokeServer()
-	fireproximityprompt(workspace.SecretQuest.NetherPortal1.ProximityPrompt)
+    if game.Players.LocalPlayer.Character.Humanoid.FloorMaterial == "Air" and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.X <= 30 then
+        Save = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
+            local Noclip = Instance.new("BodyVelocity")
+            Noclip.Name = "GGEZ"
+            Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+            Noclip.MaxForce = Vector3.new(100000,100000,100000)
+            Noclip.Velocity = Vector3.new(0,0,0)
+        end
+    end
 end)
 end
 end
