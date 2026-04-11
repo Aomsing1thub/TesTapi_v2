@@ -636,7 +636,11 @@ task.spawn(function()
 while task.wait() do
 if a1 then
 pcall(function()
-    if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y <= 35 or game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BallSocketConstraint") then
+    if workspace.CurrentArena["Power Arena"].Arena.Piao:FindFirstChild("Cone") then
+        workspace.CurrentArena["Power Arena"].Arena.Piao.Cone:Destroy()
+    end
+
+    if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y <= 28 or game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BallSocketConstraint") then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Save
         if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
             local Noclip = Instance.new("BodyVelocity")
