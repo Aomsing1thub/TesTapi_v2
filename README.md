@@ -766,8 +766,33 @@ Section:NewToggle("Toggle", false, function(state)
     end
 end)
 
-Section:NewMultiDropdown("Characters Multi", {"1","2","3"}, function(selectedOptions)
-    MultiCharacters = selectedOptions
+Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
+    game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Direita.Visible = false
+    if #selectedOptions == 1 then
+        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[1]].Transform.MouseButton1Click)
+    elseif #selectedOptions == 2 then
+        target = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes["TrolarBot\195\163o"]
+
+        if target then
+            cloned = target:Clone()
+            cloned.Parent = target.Parent
+            cloned.Name = "2_1"
+            cloned.Position = target.Position - UDim2.new(0.731, 0, 0, 0)
+            cloned.TextLabel.Name = selectedOptions[2].."_1"
+        end
+        if game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("TrolarBotao2") then
+            target = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes["TrolarBotao2"]
+
+            if target then
+                cloned = target:Clone()
+                cloned.Parent = target.Parent
+                cloned.Name = "2_2"
+                cloned.Position = target.Position - UDim2.new(0.731, 0, 0, 0)
+                cloned.TextLabel.Name = selectedOptions[2].."_2"
+            end
+        end
+        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[2]].Transform.MouseButton1Click)
+    end
 end)
 
 task.spawn(function()
