@@ -574,7 +574,7 @@ function Section:NewDropdown(name, options, callback)
     return card
 end
 
-function Section:NewMultiDropdown(name, options, callback)
+function Section:NewMultiDropdown(name, options, callback, clearCallback)
     local dropdownOpen = false
     local selectedLookup = {}
     local selectedOptions = {}
@@ -736,6 +736,9 @@ function Section:NewMultiDropdown(name, options, callback)
         rebuildDropdownOptions()
         if callback then
             callback(cloneSelectedOptions())
+        end
+        if clearCallback then
+            clearCallback()
         end
     end)
 
@@ -909,8 +912,13 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
         end
         firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[#selectedOptions]].Transform.MouseButton1Click)
     end
+end, function ()
+    for i,v in pairs (game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:GetChildren()) do
+        if string.find(child.Name,"_") then
+            child:Destroy()
+        end
+    end
 end)
-
 
 -- Section:NewButton("Button", function()
     
