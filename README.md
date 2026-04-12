@@ -756,7 +756,14 @@ Section:NewDropdown("Change Skill", Mydata, function(currentOption)
     firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[currentOption].Transform.MouseButton1Click)
 end)
 
+game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes.ChildAdded:Connect(function(child)
+    if string.find(v.Name,"_") then
+        game:GetService("ReplicatedStorage"):WaitForChild("SkillEvent"):FireServer(child.TextLabel.Name)
+    end
+end)
+
 Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
+    game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Direita.Visible = false
     if #selectedOptions == 1 then
         print("1")
         target2_1 = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("2_1")
