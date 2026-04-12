@@ -574,6 +574,68 @@ function Section:NewDropdown(name, options, callback)
     return card
 end
 
+local function MoveVerticalThenHorizontal(targetPosition, verticalSpeed, horizontalSpeed, stepDelay)
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:WaitForChild("HumanoidRootPart")
+
+    verticalSpeed = verticalSpeed or 2
+    horizontalSpeed = horizontalSpeed or 2
+    stepDelay = stepDelay or 0.03
+
+    local oldNoclip = hrp:FindFirstChild("GGEZ")
+    if oldNoclip then
+        oldNoclip:Destroy()
+    end
+
+    local Noclip = Instance.new("BodyVelocity")
+    Noclip.Name = "GGEZ"
+    Noclip.Parent = hrp
+    Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
+    Noclip.Velocity = Vector3.new(0, 0, 0)
+
+    -- ขึ้น/ลงแนวดิ่งก่อน
+    while math.abs(hrp.Position.Y - targetPosition.Y) > 0.1 do
+        local pos = hrp.Position
+        local directionY = targetPosition.Y > pos.Y and 1 or -1
+        local nextY = pos.Y + (directionY * verticalSpeed)
+
+        if directionY == 1 then
+            nextY = math.min(nextY, targetPosition.Y)
+        else
+            nextY = math.max(nextY, targetPosition.Y)
+        end
+
+        hrp.CFrame = CFrame.new(pos.X, nextY, pos.Z)
+        task.wait(stepDelay)
+    end
+
+    -- ไปแนวนอนทีละนิด
+    while (Vector3.new(hrp.Position.X, targetPosition.Y, hrp.Position.Z) - targetPosition).Magnitude > 0.1 do
+        local pos = hrp.Position
+        local flatTarget = Vector3.new(targetPosition.X, pos.Y, targetPosition.Z)
+        local flatDirection = flatTarget - pos
+
+        if flatDirection.Magnitude <= horizontalSpeed then
+            hrp.CFrame = CFrame.new(targetPosition)
+            break
+        end
+
+        local moveDir = flatDirection.Unit * horizontalSpeed
+        local nextPos = pos + Vector3.new(moveDir.X, 0, moveDir.Z)
+
+        hrp.CFrame = CFrame.new(nextPos)
+        task.wait(stepDelay)
+    end
+
+    hrp.CFrame = CFrame.new(targetPosition)
+
+    local currentNoclip = hrp:FindFirstChild("GGEZ")
+    if currentNoclip then
+        currentNoclip:Destroy()
+    end
+end
+
 function Section:NewMultiDropdown(name, options, callback, clearCallback)
     local dropdownOpen = false
     local selectedLookup = {}
@@ -938,7 +1000,7 @@ while wait() do
 if a1 then
 pcall(function()
     if game.Players.LocalPlayer.Character.Humanoid.FloorMaterial ~= Enum.Material.Air and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y > 30 and not stop then
-        Save = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        Save = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
         wait(.5)
         if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
             game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ"):Destroy()
@@ -955,7 +1017,7 @@ if a1 then
 pcall(function()
     if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y <= 25 then
         stop = true
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Save
+        MoveVerticalThenHorizontal(Save)
         if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GGEZ") then
             local Noclip = Instance.new("BodyVelocity")
             Noclip.Name = "GGEZ"
