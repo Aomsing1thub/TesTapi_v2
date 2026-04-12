@@ -774,7 +774,7 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
     elseif #selectedOptions == 2 then
         print("2")
         target3_1 = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("3_1")
-        target3_1 = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("3_2")
+        target3_2 = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("3_2")
         if target3_1 then
             target3_1:Destroy()
             print("Destroy 3_1")
