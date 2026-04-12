@@ -757,30 +757,33 @@ Section:NewDropdown("Change Skill", Mydata, function(currentOption)
 end)
 
 Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
-    if #selectedOptions > 1 then
+    if #selectedOptions == 1 then
+        wait(1)
+        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[1]].Transform.MouseButton1Click)
+    elseif #selectedOptions == 2 then
         game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Direita.Visible = false
         target = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes["TrolarBot\195\163o"]
 
-        if not game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("2_1") then
-            if target then
-                local cloned = target:Clone()
-                cloned.Parent = target.Parent
-                cloned.Name = "2_1"
-                cloned.Position = target.Position - UDim2.new(0.731, 0, 0, 0)
-                cloned.TextLabel.Text = selectedOptions[#selectedOptions]
-            end
-        elseif not game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("3_1") then
-            if target then
-                local cloned = target:Clone()
-                cloned.Parent = target.Parent
-                cloned.Name = "3_1"
-                cloned.Position = target.Position - UDim2.new(0, 0, 0.95, 0)
-                cloned.TextLabel.Text = selectedOptions[#selectedOptions]
-            end
+        if target then
+            cloned = target:Clone()
+            cloned.Parent = target.Parent
+            cloned.Name = "2_1"
+            cloned.Position = target.Position - UDim2.new(0.731, 0, 0, 0)
+            cloned.TextLabel.Text = selectedOptions[selectedOptions[1]]
         end
+
+        target2 = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("TrolarBotao2")
+        
+        if target2 then
+            cloned = target2:Clone()
+            cloned.Parent = target2.Parent
+            cloned.Name = "2_2"
+            cloned.Position = target2.Position - UDim2.new(0.731, 0, 0, 0)
+            cloned.TextLabel.Text = selectedOptions[selectedOptions[1]]
+        end
+
+        wait(1)
         firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[#selectedOptions]].Transform.MouseButton1Click)
-    else
-        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Tranformar.Characters[selectedOptions[1]].Transform.MouseButton1Click)
     end
 end)
 
