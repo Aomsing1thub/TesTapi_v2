@@ -769,7 +769,7 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
             cloned.Parent = target.Parent
             cloned.Name = "2_1"
             cloned.Position = target.Position - UDim2.new(0.731, 0, 0, 0)
-            cloned.TextLabel.Text = selectedOptions[selectedOptions[1]]
+            cloned.TextLabel.Text = selectedOptions[1]
         end
 
         target2 = game:GetService("Players").LocalPlayer.PlayerGui.Botoes.Poderes:FindFirstChild("TrolarBotao2")
@@ -779,7 +779,7 @@ Section:NewMultiDropdown("Characters Multi", Mydata, function(selectedOptions)
             cloned.Parent = target2.Parent
             cloned.Name = "2_2"
             cloned.Position = target2.Position - UDim2.new(0.731, 0, 0, 0)
-            cloned.TextLabel.Text = selectedOptions[selectedOptions[1]]
+            cloned.TextLabel.Text = selectedOptions[1]
         end
 
         wait(1)
